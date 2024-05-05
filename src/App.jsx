@@ -5,18 +5,27 @@ import ItemListContainer from './Componets/ItemListContainer';
 import './App.css'; 
 import ItemDetailContainer from './Componets/ItemDetailContainer';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { CartProvider } from './Componets/CartContext';
+import firebase from 'firebase/compat/app';
+import CartItem from './Componets/CartItem/CartItem';
+import Cart from './Componets/Cart';
+
 
 function App() {
+  
   return (
     <>
     <BrowserRouter>
+    <CartProvider>
       <NavBar />
       <Routes>
         <Route path="/" element={<ItemListContainer />} />
         <Route path="/category/:id" element={<ItemListContainer />} />
         <Route path="/item/:id" element={<ItemDetailContainer />} />
+        <Route path='/cart' element={<Cart/>}/>
+        
       </Routes>
-      
+      </CartProvider>
     </BrowserRouter>
     <Footer/>
     </>

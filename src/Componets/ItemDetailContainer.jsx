@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import data from "../data/products.json";
 import { ItemDetail } from "./ItemDetail";
+import { getFirestore, getDoc, doc } from "firebase/firestore";
 
 const ItemDetailContainer = () => {
   const [item, setItem] = useState(null);
@@ -14,10 +15,13 @@ const ItemDetailContainer = () => {
     });
 
     get.then((data) => {
-      console.log(id);  
-      const filtro = data.find((i) => i.id == id);
-      console.log(filtro);
-      setItem(filtro);
+      const db = getFirestore();
+
+    const refDoc = doc(db, "items", id);
+
+    getDoc(refDoc).then((snapshot) => {
+      setItem({ id: snapshot.id, ...snapshot.data() });
+    });
     });
   }, [id]);
 
