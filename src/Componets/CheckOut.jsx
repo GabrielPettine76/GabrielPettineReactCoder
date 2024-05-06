@@ -17,7 +17,7 @@ const initialValues = {
 
 const CheckOut = () => {
   const [values, setValues] = useState(initialValues);
-  const { cart,getTotal } = useContext(CartContext);
+  const { cart,getTotal,clearCart } = useContext(CartContext);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setValues({
@@ -30,7 +30,7 @@ const CheckOut = () => {
     const order = {
         buyer:values,
         items:cart,
-        total:123,
+        total:getTotal(),
     };
     //console.log(cart.getTotal());
     e.preventDefault();
@@ -46,7 +46,7 @@ const CheckOut = () => {
       if (id) {
         alert("Su orden: " + id + " ha sido completada!");
       }
-    });
+    }).finally(()=>clearCart())
   };
 
   return (
