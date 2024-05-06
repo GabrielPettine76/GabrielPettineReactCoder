@@ -3,14 +3,9 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import { initializeApp } from 'firebase/app';
-const firebaseConfig = {
-  apiKey: "AIzaSyDzrHENvoItUwHOd4vKd1yG2x5gBgo-biw",
-  authDomain: "pettinereactcoder.firebaseapp.com",
-  projectId: "pettinereactcoder",
-  storageBucket: "pettinereactcoder.appspot.com",
-  messagingSenderId: "496722699483",
-  appId: "1:496722699483:web:4444b945692c98f09858fe"
-};
+import firebaseConfig from './FirebaseConfig.jsx';
+import firebaseConfig from './FirebaseConfig.jsx';
+const firebaseConfig = firebaseConfig;
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
