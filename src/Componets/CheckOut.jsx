@@ -17,7 +17,7 @@ const initialValues = {
 
 const CheckOut = () => {
   const [values, setValues] = useState(initialValues);
-  const { cart } = useContext(CartContext);
+  const { cart,getTotal } = useContext(CartContext);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setValues({
@@ -30,13 +30,16 @@ const CheckOut = () => {
     const order = {
         buyer:values,
         items:cart,
-        total:16500,
+        total:123,
     };
+    //console.log(cart.getTotal());
     e.preventDefault();
     console.log(values);
-    console.log(cart);
+    console.log(getTotal());
     console.log(order);
+    
     const db = getFirestore();
+    
     const orderCollection = collection(db, "orders");
 
     addDoc(orderCollection, order).then(({ id }) => {
@@ -49,7 +52,7 @@ const CheckOut = () => {
   return (
     <div>
       <h2>Finalizar Compra</h2>
-      <form onSubmit={handleSubmit}>
+      <form >
         <div className="mb-3">
           <label htmlFor="email" className="form-label">Email:</label>
           <input type="email" className="form-control" id="email" name="email" value={values.email} onChange={handleInputChange} required />
@@ -62,7 +65,7 @@ const CheckOut = () => {
           <label htmlFor="phone" className="form-label">Teléfono:</label>
           <input type="tel" className="form-control" id="phone" name="phone" value={values.phone} onChange={handleInputChange} required />
         </div>
-        <button type="submit" className="btn btn-primary">Finalizar Compra</button>
+        <button type="button" className="btn btn-primary" onClick={handleSubmit}>Finalizar Compra</button>
       </form>
       <div>
         <h3>Resumen de la Compra:</h3>

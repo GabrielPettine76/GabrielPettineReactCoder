@@ -5,7 +5,8 @@ export const CartContext = createContext({
     cart: [],
     addItem: () => {},
     removeItem: () => {},
-    clearCart: () => {}
+    clearCart: () => {},
+    getTotal: () =>{}
 });
 
 export const CartProvider = ({ children }) => {
@@ -36,14 +37,16 @@ export const CartProvider = ({ children }) => {
     const isInCart = (itemId) => {
         return cart.some(item => item.id === itemId);
     };
-
+    const getTotal = () => {
+        return cart.reduce((total, item) => total + (item.quantity * item.price), 0);
+    };
     // Utilizamos useEffect para imprimir el valor actualizado del carrito cada vez que cambia
     useEffect(() => {
         console.log(cart);
     }, [cart]);
 
     return (
-        <CartContext.Provider value={{ cart, addItem, removeItem, clearCart }}>
+        <CartContext.Provider value={{ cart, addItem, removeItem, clearCart,getTotal }}>
             {children}
         </CartContext.Provider>
     );
