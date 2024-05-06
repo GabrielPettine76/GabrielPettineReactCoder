@@ -9,6 +9,7 @@ import { CartProvider } from './Componets/CartContext';
 import firebase from 'firebase/compat/app';
 import CartItem from './Componets/CartItem/CartItem';
 import Cart from './Componets/Cart';
+import CheckOut from './Componets/CheckOut';
 
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
         <Route path="/category/:id" element={<ItemListContainer />} />
         <Route path="/item/:id" element={<ItemDetailContainer />} />
         <Route path='/cart' element={<Cart/>}/>
-        
+        <Route path='/checkout' element={<CheckOut/>}/>
       </Routes>
       </CartProvider>
     </BrowserRouter>
